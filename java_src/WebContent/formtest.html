@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+    <h2>input 태그 연습하기</h2>
+    <form action="fifth" method="post"> <!-- method=POST 직접 지정 안하면 default는 GET임 -->
+        <label>이름 </label><input type="text" name="name" value="guest_name" /><br />
+        <label>비밀번호 </label><input type="password" name="pwd" value="123"/><br />
+        <label>생일 </label><input type="date" name="birth" value="guest_birth"/><br />
+        <label>나이 </label><input type="number" name="age" value="guest_age"/><br />
+        <label>성별 </label> <input type="radio" name="sex" value="male" checked/>남
+                           <input type="radio" name="sex" value="female" checked/>여<br />
+        
+        <label>색깔 </label>
+        <select name="city">
+        	<option value="red">빨강
+        	<option value="blue" selected>파랑
+        	<option value="yellow">노랑 
+        </select><br>
+        
+        <textarea rows="10" cols="50" name="txt_area">
+        	hello~
+        </textarea></br>
+        
+        
+        <input type="submit" value="전송">
+        <input type="reset" value="지우기">
+    </form>
+</body>
+</html>

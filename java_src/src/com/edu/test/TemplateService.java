@@ -6,17 +6,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
 /*
- *[0627] ¹İº¹ »ç¿ëÇÏ´Â ¼­ºí¸´ 
+ *[0627] í…œí”Œë¦¿ ì„¤ì •
  */
 @WebServlet("/temp")
 public class TemplateService extends HttpServlet {
 	@Override
-	//service()¿¡¼­ ºĞ±â½ÃÅ°°í È£Ãâ½ÃÅ´
+
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setContentType("text/html;charset=UTF-8");
-		//outsteram  »ı¼º
+		//outsteram  ìƒì„±
 		PrintWriter out = resp.getWriter();
-		out.print("<h1>Get method requested from User</h1></br>");
+		out.print("<h1>"+ req.getMethod()+ " method requested from User</h1></br>");
+		
+		
 		out.close();
 	}
 	@Override

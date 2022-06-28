@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>edu</display-name>
+<!--  
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+-->
+<!-- [0628] Servlet Conetxt 변수 설정 -->
+	<context-param>
+		<param-name>comm_config</param-name>
+		<!--  <param-value>hello_config</param-value> -->
+		<param-value>/WEB-INF/presentation.xml</param-value>
+	</context-param>
+<!-- [06.27] servelet 논리적 url 설정 -->
+	<!-- 서블릿 소스에 대한 축약어 설정 -->
+	<servlet>
+		<servlet-name>first</servlet-name>
+		<servlet-class>com.edu.test.FirstService</servlet-class>
+	</servlet>
+<!-- [0628] servelet 논리적 url 설정 -->
+	<servlet>
+		<!--############################# 
+	####	servelt 태그 쓸 시 필수 ######
+	##################################
+	-->
+		<servlet-name>six</servlet-name>
+		<servlet-class>com.edu.test.SixService</servlet-class>
+		
+	<!--############################# 
+	####	servelt 태그 쓸 시 옵션 ######
+	##################################
+	-->
+		<init-param><!-- 쓰는 목적 : 변수 전달 -->
+		<!--####### init-param 태그 쓸 시 필수 #### -->
+			<param-name>name</param-name>  
+			<param-value>uki408</param-value>
+		</init-param>
+		<init-param><!-- 쓰는 목적 : 변수 전달 -->
+		<!--####### init-param 태그 쓸 시 필수 #### -->
+			<param-name>pwd</param-name>
+			<param-value>1004</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup><!-- 의미: 서버 생성시 객체도 생성해라 -->
+	</servlet>
+	
+<!-- [0628] 서블릿에 대한 실행할  URL생성 -->
+	<servlet-mapping>
+		<servlet-name>six</servlet-name>
+		<url-pattern>/six</url-pattern>
+	</servlet-mapping>
+<!-- [0627] 서블릿에 대한 실행할  URL생성 -->
+	<servlet-mapping>
+		<servlet-name>first</servlet-name>
+		<url-pattern>/hello</url-pattern>	<!-- 슬래시 빼면 안됨 -->
+	</servlet-mapping>
+</web-app>
