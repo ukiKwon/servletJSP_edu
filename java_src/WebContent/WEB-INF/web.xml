@@ -1,62 +1,212 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
-  <display-name>edu</display-name>
-<!--  
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
-  </welcome-file-list>
--->
-<!-- [0628] Servlet Conetxt 변수 설정 -->
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	id="WebApp_ID" version="3.1">
+	<display-name>edu</display-name>
+	<!-- <welcome-file-list> <welcome-file>index.html</welcome-file> <welcome-file>index.htm</welcome-file> 
+		<welcome-file>index.jsp</welcome-file> <welcome-file>default.html</welcome-file> 
+		<welcome-file>default.htm</welcome-file> <welcome-file>default.jsp</welcome-file> 
+		</welcome-file-list> -->
+		
+<!--  Filter test -->
+<!-- [0629]  RequestDisPather page moving test -->
+	<servlet>
+		<servlet-name>dispatcher1</servlet-name>
+		<servlet-class>com.edu.test.passing.RequestDisPatherTest1</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>dispatcher1</servlet-name>
+		<url-pattern>/dispatcher1</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>dispatcher2</servlet-name>
+		<servlet-class>com.edu.test.passing.RequestDisPatherTest2</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>dispatcher2</servlet-name>
+		<url-pattern>/dispatcher2</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>bookRegister</servlet-name>
+		<servlet-class>com.edu.test.custom.BookRegServlet1</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>bookRegister</servlet-name>
+		<url-pattern>/bookReg</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>bookOutput</servlet-name>
+		<servlet-class>com.edu.test.custom.BookRegServlet2</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>bookOutput</servlet-name>
+		<url-pattern>/bookOutput</url-pattern>
+	</servlet-mapping>
+	
+<!-- [0629]  HttpSevletResponse page moving test -->
+	<servlet>
+		<servlet-name>portalsite</servlet-name>
+		<servlet-class>com.edu.test.passing.PortalSite</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>portalsite</servlet-name>
+		<url-pattern>/portalSite</url-pattern>
+	</servlet-mapping>
+
+<!-- [0629] log in-out Test -->
+	<servlet>
+		<servlet-name>loginout</servlet-name>
+		<servlet-class>com.edu.test.custom.LogInOutServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>loginout</servlet-name>
+		<url-pattern>/loginout</url-pattern>
+	</servlet-mapping>
+	
+<!-- [0629] Session Test -->
+	<servlet>
+		<servlet-name>sessiontest</servlet-name>
+		<servlet-class>com.edu.test.session.SessionTest</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>sessiontest</servlet-name>
+		<url-pattern>/sessiontest</url-pattern>
+	</servlet-mapping>
+	
+<!-- [0629] Cookie Test -->
+	<servlet>
+		<servlet-name>sendcookie</servlet-name>
+		<servlet-class>com.edu.test.cookie.Cookie1</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>sendcookie</servlet-name>
+		<url-pattern>/sendcookie</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>viewcookie</servlet-name>
+		<servlet-class>com.edu.test.cookie.Cookie2</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>viewcookie</servlet-name>
+		<url-pattern>/viewcookie</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>countcookie</servlet-name>
+		<servlet-class>com.edu.test.cookie.Cookie3</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>countcookie</servlet-name>
+		<url-pattern>/countcookie</url-pattern>
+	</servlet-mapping>
+	
+<!-- [0628] ServletContext Test -->
+	<!-- Servlet Conetxt 변수 설정 -->
 	<context-param>
 		<param-name>comm_config</param-name>
-		<!--  <param-value>hello_config</param-value> -->
+		<!-- <param-value>hello_config</param-value> -->
 		<param-value>/WEB-INF/presentation.xml</param-value>
 	</context-param>
-<!-- [06.27] servelet 논리적 url 설정 -->
-	<!-- 서블릿 소스에 대한 축약어 설정 -->
+	<!-- [0628] servelet 논리적 url 설정 -->
 	<servlet>
-		<servlet-name>first</servlet-name>
-		<servlet-class>com.edu.test.FirstService</servlet-class>
-	</servlet>
-<!-- [0628] servelet 논리적 url 설정 -->
-	<servlet>
-		<!--############################# 
-	####	servelt 태그 쓸 시 필수 ######
-	##################################
-	-->
+		<!--############################# #### servelt 태그 쓸 시 필수 ###### ################################## -->
 		<servlet-name>six</servlet-name>
-		<servlet-class>com.edu.test.SixService</servlet-class>
-		
-	<!--############################# 
-	####	servelt 태그 쓸 시 옵션 ######
-	##################################
-	-->
+		<servlet-class>com.edu.test.servletcontext.SixService</servlet-class>
+
+		<!--############################# #### servelt 태그 쓸 시 옵션 ###### ################################## -->
 		<init-param><!-- 쓰는 목적 : 변수 전달 -->
-		<!--####### init-param 태그 쓸 시 필수 #### -->
-			<param-name>name</param-name>  
+			<!--####### init-param 태그 쓸 시 필수 #### -->
+			<param-name>name</param-name>
 			<param-value>uki408</param-value>
 		</init-param>
 		<init-param><!-- 쓰는 목적 : 변수 전달 -->
-		<!--####### init-param 태그 쓸 시 필수 #### -->
+			<!--####### init-param 태그 쓸 시 필수 #### -->
 			<param-name>pwd</param-name>
 			<param-value>1004</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup><!-- 의미: 서버 생성시 객체도 생성해라 -->
 	</servlet>
-	
-<!-- [0628] 서블릿에 대한 실행할  URL생성 -->
 	<servlet-mapping>
 		<servlet-name>six</servlet-name>
 		<url-pattern>/six</url-pattern>
 	</servlet-mapping>
-<!-- [0627] 서블릿에 대한 실행할  URL생성 -->
+	
+	<servlet>
+		<servlet-name>context1</servlet-name>
+		<servlet-class>com.edu.test.http.servletcontext.SevenService</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>context1</servlet-name>
+		<url-pattern>/context1</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>context2</servlet-name>
+		<servlet-class>com.edu.test.http.servletcontext.EeightService</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>context2</servlet-name>
+		<url-pattern>/context2</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>nine</servlet-name>
+		<servlet-class>com.edu.test.http.servletcontext.NineService</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>nine</servlet-name>
+		<url-pattern>/nine</url-pattern>
+	</servlet-mapping>
+
+<!-- [0627] Http parameter Test -->
+	<servlet>
+		<servlet-name>first</servlet-name>
+		<servlet-class>com.edu.test.http.FirstService</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>first</servlet-name>
-		<url-pattern>/hello</url-pattern>	<!-- 슬래시 빼면 안됨 -->
+		<url-pattern>/first</url-pattern>
 	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>second</servlet-name>
+		<servlet-class>com.edu.test.http.SecondService</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>second</servlet-name>
+		<url-pattern>/second</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>third</servlet-name>
+		<servlet-class>com.edu.test.http.ThirdService</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>third</servlet-name>
+		<url-pattern>/third</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>fourth</servlet-name>
+		<servlet-class>com.edu.test.http.FourthService</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>fourth</servlet-name>
+		<url-pattern>/fourth</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>fifth</servlet-name>
+		<servlet-class>com.edu.test.http.FifthService</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>fifth</servlet-name>
+		<url-pattern>/fifth</url-pattern>
+	</servlet-mapping>
+	
 </web-app>

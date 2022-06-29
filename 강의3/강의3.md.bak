@@ -1,0 +1,50 @@
+/*
+* 단축키 개꿀
+ - 메소드 보여주기: ctrl + space
+ - 현재행 복사:  ctrl+alt + 화살표 아래
+ - import 단축키 : ctrl + shift + m
+ - 함수 단위 보기 : ctrl + shift + 화살표 위로
+ - 코드 라인정렬 : ctrl + shift + f
+ - 라인 코드 이동시키기 : alt + 원하는 방향
+*//*
+* ServletContext
+* 서버 시작 시 서블릿Context가 application 개수별로 생김
+* ServletContext로 setAttribute()된 Object는 다시 getAttribute()해서 빼올때 TypeCasting 해서 써야함
+*/
+1. 쿠키
+ - 서버가 종료되도 사용자 정보를 쓰기 위해서 어떻게 하나?
+  ㅇ "사용자 측에 저장(하는 기술)" = 쿠키
+  ㅇ 형식 : TEXT
+  ㅇ 서버 내렸다가 올려도 살아있음 그래서.
+  
+2. HttpSession
+ - 생성 : Client 접속 시 서버에서 getSession() 또는 getSession(true) 생성시
+  ㅇ 위 두 함수는 기존 세션 없으면 새로 생성해서 돌려줌, getSession(false)  ---> 없으면 null 반환함
+ ***** HttpServletRequest에서 getSession()을 호출해서 HttpSession에 할당한다
+ 
+
+3. HttpServletRequest
+ - 이 녀석이 제일 많이 쓰임. 페이지 A와 B가 쌍으로 움직인다고 하면(*꼭 2 페이지가 아니더라도)
+ - Servlet이 응답 시 위 객체는 사라진다.
+  ㅇ 그래서 이 req를 재활용하기 위해서는, 요청시 B 페이지를 하나 더 만들어서 req 주소를 전달해버린다.
+ - HttpServletResponse 요청 재지정 :: 다른 WA에 있어도 됨
+  ㅇ sendRedirect(String location)
+  ㅇ encodeRedirectURl(String url)
+ - RequestDispatcher 요청 재지정 ::같은 WA에 있어야함
+  ㅇ forward(ServletRequest, ServletResponse)
+  ㅇ include(ServletRequest, ServletResponse)
+  
+ ※ 어떻게 넘겨받았는지 어떻게 확인하지? HttpServletResponse vs RequestDispatcher 인지
+  - A -> B -> C
+   ㅇ [HttpServletResponse] : A가 B로 보낸 req/res을 C로 넘기면 C가 새로 req/res 만들어서 A로 보냄
+   ㅇ [RequestDispatcher] : A가 B로 보낸 req/res를 C가 그대로 사용하고 A로 보냄
+  ※ HttpServletResponse 얘를 쓰면 ----> URL이 바뀜
+   ㅇ A가 쓰던 req/res를 새로 만들어서 복사해서 넘겨줘서 URL이 바뀜
+  ※ RequestDispatcher 얘를 쓰면 ----> URL이 바뀌지 않음
+   ㅇ 사용자가 A페이지로 들어가서 요청한 URL 그대로 간다.
+   ㅇ A가 쓰던 req/res를 그대로 받아 쓰기 때문에 그렇다.
+
+4. 필터
+- 사용자들이 보내는 요청 정보를 로깅하고 싶다.
+- 필터의 위치는 서버와 사용자 사이에서 존재한다.
+- 서블릿은 아니다.
