@@ -4,7 +4,13 @@ public class Book {
 	String title;
 	String author;
 	String publisher;
-	Book(String p1, String p2, String p3) {
+	
+	public Book() {
+		this.title = "";
+		this.author = "";
+		this.publisher = "";
+	}
+	public Book(String p1, String p2, String p3) {
 		this.title = p1;
 		this.author = p2;
 		this.publisher = p3;

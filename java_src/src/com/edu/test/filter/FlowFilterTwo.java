@@ -15,19 +15,25 @@ import javax.servlet.ServletResponse;
  */
 public class FlowFilterTwo implements Filter {
 	
+	String strcode;
+	
 	//객체 생성 시 호출::초기화 작업
 	@Override
-	public void init(FilterConfig arg0) throws ServletException {
+	public void init(FilterConfig cnf) throws ServletException {
 		// TODO Auto-generated method stub
 		System.out.println("Init() 호출 ... Two");
+		strcode = cnf.getInitParameter("charset");
 	}
 	//매핑한 페이지가 유저로부터 요청 시 호출 : 필터링 작업
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
 			throws IOException, ServletException {
-		// TODO Auto-generated method stub
+		req.setCharacterEncoding(strcode);
+
 		System.out.println("doFilter() 호출 전  ... Two");
+
 		chain.doFilter(req,  resp);
+		
 		System.out.println("doFilter() 호출 후  ... Two");
 	}
 	//필터 삭제 시 호출

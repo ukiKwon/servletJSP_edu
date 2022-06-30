@@ -4,47 +4,94 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	id="WebApp_ID" version="3.1">
 	<display-name>edu</display-name>
-	<!-- <welcome-file-list> <welcome-file>index.html</welcome-file> <welcome-file>index.htm</welcome-file> 
-		<welcome-file>index.jsp</welcome-file> <welcome-file>default.html</welcome-file> 
-		<welcome-file>default.htm</welcome-file> <welcome-file>default.jsp</welcome-file> 
-		</welcome-file-list> -->
-		
-<!--  Filter test -->
+
+
+<!-- [0628] ServletContext Test -->
+	<!-- Servlet Conetxt 변수 설정 -->
+	<context-param>
+		<param-name>comm_config</param-name>
+		<!-- <param-value>hello_config</param-value> -->
+		<param-value>/WEB-INF/presentation.xml</param-value>
+	</context-param>
+	
+<!-- [0629] Filter test -->
+	<filter>
+		<filter-name>filterone</filter-name>
+		<filter-class>com.edu.test.filter.FlowFilterOne</filter-class>
+	</filter>
+	
+	<filter>
+		<filter-name>filtertwo</filter-name>
+		<filter-class>com.edu.test.filter.FlowFilterTwo</filter-class>
+		<init-param>
+			<param-name>charset</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>filterone</filter-name>
+		<url-pattern>/second</url-pattern>	
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>filtertwo</filter-name>
+		<url-pattern>/*</url-pattern>	
+	</filter-mapping>
+
+<!-- [0630] Listener Test -->
+	<listener>
+		<listener-class>com.edu.test.listener.MyListener</listener-class>
+	</listener>
+<!-- [0630] Filter Hangeul Test -->
+	<servlet>
+		<servlet-name>test6</servlet-name>
+		<servlet-class>com.edu.test.filter.FilterTest6</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>test6</servlet-name>
+		<url-pattern>/test6</url-pattern>
+	</servlet-mapping>
+	
 <!-- [0629]  RequestDisPather page moving test -->
 	<servlet>
 		<servlet-name>dispatcher1</servlet-name>
 		<servlet-class>com.edu.test.passing.RequestDisPatherTest1</servlet-class>
 	</servlet>
-	<servlet-mapping>
-		<servlet-name>dispatcher1</servlet-name>
-		<url-pattern>/dispatcher1</url-pattern>
-	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>dispatcher2</servlet-name>
 		<servlet-class>com.edu.test.passing.RequestDisPatherTest2</servlet-class>
 	</servlet>
-	<servlet-mapping>
-		<servlet-name>dispatcher2</servlet-name>
-		<url-pattern>/dispatcher2</url-pattern>
-	</servlet-mapping>
 	
 	<servlet>
 		<servlet-name>bookRegister</servlet-name>
 		<servlet-class>com.edu.test.custom.BookRegServlet1</servlet-class>
 	</servlet>
-	<servlet-mapping>
-		<servlet-name>bookRegister</servlet-name>
-		<url-pattern>/bookReg</url-pattern>
-	</servlet-mapping>
 	
 	<servlet>
 		<servlet-name>bookOutput</servlet-name>
 		<servlet-class>com.edu.test.custom.BookRegServlet2</servlet-class>
 	</servlet>
+
 	<servlet-mapping>
 		<servlet-name>bookOutput</servlet-name>
 		<url-pattern>/bookOutput</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>bookRegister</servlet-name>
+		<url-pattern>/bookReg</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>dispatcher2</servlet-name>
+		<url-pattern>/dispatcher2</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>dispatcher1</servlet-name>
+		<url-pattern>/dispatcher1</url-pattern>
 	</servlet-mapping>
 	
 <!-- [0629]  HttpSevletResponse page moving test -->
@@ -82,36 +129,32 @@
 		<servlet-name>sendcookie</servlet-name>
 		<servlet-class>com.edu.test.cookie.Cookie1</servlet-class>
 	</servlet>
-	<servlet-mapping>
-		<servlet-name>sendcookie</servlet-name>
-		<url-pattern>/sendcookie</url-pattern>
-	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>viewcookie</servlet-name>
 		<servlet-class>com.edu.test.cookie.Cookie2</servlet-class>
 	</servlet>
-	<servlet-mapping>
-		<servlet-name>viewcookie</servlet-name>
-		<url-pattern>/viewcookie</url-pattern>
-	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>countcookie</servlet-name>
 		<servlet-class>com.edu.test.cookie.Cookie3</servlet-class>
 	</servlet>
+
 	<servlet-mapping>
 		<servlet-name>countcookie</servlet-name>
 		<url-pattern>/countcookie</url-pattern>
 	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>viewcookie</servlet-name>
+		<url-pattern>/viewcookie</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>sendcookie</servlet-name>
+		<url-pattern>/sendcookie</url-pattern>
+	</servlet-mapping>
 	
-<!-- [0628] ServletContext Test -->
-	<!-- Servlet Conetxt 변수 설정 -->
-	<context-param>
-		<param-name>comm_config</param-name>
-		<!-- <param-value>hello_config</param-value> -->
-		<param-value>/WEB-INF/presentation.xml</param-value>
-	</context-param>
 	<!-- [0628] servelet 논리적 url 설정 -->
 	<servlet>
 		<!--############################# #### servelt 태그 쓸 시 필수 ###### ################################## -->
@@ -208,5 +251,10 @@
 		<servlet-name>fifth</servlet-name>
 		<url-pattern>/fifth</url-pattern>
 	</servlet-mapping>
+	
+		<!-- <welcome-file-list> <welcome-file>index.html</welcome-file> <welcome-file>index.htm</welcome-file> 
+		<welcome-file>index.jsp</welcome-file> <welcome-file>default.html</welcome-file> 
+		<welcome-file>default.htm</welcome-file> <welcome-file>default.jsp</welcome-file> 
+		</welcome-file-list> -->
 	
 </web-app>
