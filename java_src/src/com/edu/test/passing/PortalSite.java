@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 /*
  * [0629] 페이지 이동
  */
-//@WebServlet("portalSite")
+//@WebServlet("/portalSite")
 public class PortalSite extends HttpServlet {
 	final String PARAM1 = "id";
 	final String PARAM2 = "pwd";

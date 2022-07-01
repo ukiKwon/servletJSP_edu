@@ -1,0 +1,9 @@
+const dns = require('dns')
+const csv = reuiqre('csv-parser')
+const fs = require('fs')
+
+const promises = []
+
+/*
+ * 
+*/

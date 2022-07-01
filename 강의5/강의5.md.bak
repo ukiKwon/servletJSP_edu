@@ -1,0 +1,92 @@
+1. XML 태그할때 장점
+  - 직접 값을 줄 수 있다
+  - jsp 표현식을 쓸 수 도 있다
+ 
+2. EL
+  - 더 간단하게 표현할 수 있음
+   ㅇ 내장객체까지는 볼 필요는 없음. 다른 방식을 쓸 거기 때문에
+  - 이런 문법이구나만 보고 지금 말 하는것만 알면 됨
+ (1) 데이터를 뽑아내고 싶을떄 EL은 어떻게 하나? 
+  - ${variable_name}
+   ㅇ EL로 선언된 파라미터(key에 해당)가 있는지 확인함
+   **** 근데, 선언된 변수가 따로 없으면 --> HttpServletRequest.getAttribute(variable_name);  이거를 EL에서 자동으로 해줌
+   **** 그런데도 없다? HttpSession.getAttribute(variable_name);
+   **** 그런데도 없다? ServletContext.getAttribute(variable_name);
+   
+  - (MY) EL 이란게 그 동안 봤던 표현식 중 하나 였구나. : ${}
+  
+3. Spring
+ ※자바에서 객체 사용하는 것은 3가지
+ - 객체 선언(class aa{})/생성(= new aa())/사용{aa.getAA(),,aa.setAA()}
+ - 스프링은 "bean" 개념이 중요하다.
+  ㅇ bean : 서버에 의해 사용되어지는 자바 객체
+  ㅇ 이 개념을 이용해서, 개발자는 "객체 선언"만 해라. 나머지는 서버에서 알아서 해주겠다.
+  
+ ※ EJB (200's 초반)
+  - 개념이 좋아서 사용함
+   ㅇ 현재는 이걸로 개발되는 것은 없음 > WHY???????????????
+   *** 함정 : 서버에서 사용하는 요구사항을 맞추려다 보니, 무거워졌음
+ ※ JSP Bean / Spring Bean
+  - 거의 같다. 하나 이해하면 이해하기 쉽다.
+  - Bean 생성 규칙이 둘다 같다.
+  
+4. Bean ===> 서버에 의해서 사용되는 자바 객체
+ - 사용 규칙
+  (1) 패키지화 : WEB-INF > classes , 아래 패키지 형태로 컴파일(.class) 생성되어있다
+  (2) 기본 생성자존재 : argument 없는 형태, 아무일도 안함
+  (3) 멤버변수는 private으로 선언 
+  (4) public 접근자로, getter/setter 메소드 필요함
+  ===> 이런 형태로 생성된 class는 JSP Beans로 사용할 수 있다.
+  ㅇ 내가 개별로 생성한 Book 클래스는, VO객체 이면서 && JSP Beans 객체이기도 하다.
+  
+ - <jsp:setProperty property="*" name="hello1"/> //이거 쓰려고 Bean 사용한다.
+ - 연관 소스 : bookReg.jsp
+ 
+5. DB연결
+ - 내가 만든 JAVA server에서 oracle DB에 연결하기 위한 API 제공함 
+  ㅇ java.sql
+ - JDBC 드라이버
+  ㅇ java.sql interface 내용을 DB 벤더사(oracle, mysql, ms-sql)별로 구현한 jar 파일
+  ㅇ WEB-INF > lib 에 나두면 됨
+  
+  ※ 공통적으로 사용하는 JDBC면, Web container(WAS) HOME 디렉토리 내에 있는 lib에 두면 됨
+   - tomcat > lib 
+    ㅇ 여기에 가보면 공통적인 다른 API 내용들이 보임
+ 
+6. DB 커서
+ - Oracle DB 커서는 실제 값이 있던 없던, 첫행과 마지막행이 존재함.
+ - 그리고 next() 함수를 통해서 커서를 다음으로 옮김	
+ - 그리고 값을 뺴오려면, getter() 메소드를 통해서, 원하는 타입형과 컬럼 값을 붙여서 빼오면 된다
+  ㅇ ex) ResultSet rs = stmat.execute("SQL 문");
+    while (rs.next()) {
+    	String id = rs.getString("id");
+    	Int age = rs.getInt("age");
+    };
+
+
+7. MVC 모델
+ - View : html/css, JS(Jquery, react, vue.js...),jsp
+ - Controller : view의 요청받는 객체
+  ㅇ 작업하는 것들
+  1. 파라미터 추출
+  2. 유효성 검사
+  3. 서비스 메소드 호출
+  4. 출력뷰로 이동
+
+  *** JSP로 개발하면 ---> '모델1'으로 개발했다.(거의 쓰지 않음)
+  *** 서블릿 ---------> '모델2'으로 개발했다.
+ - Model : POJO 객체다.
+  ㅇ Service(Biz)::서비스(로직) 수행
+  ㅇ DAO::DB안에 든 데이터 객체만 처리하겠다
+  
+ - 순서 : view(요청들어오면) --> controller(서비스 분기) -> (1)Biz, (2)DAO->DB 처리
+ - 3-tier
+  ㅇ Presentation 영역 : view -> controller
+  ㅇ Biz 영역 : controller -> Biz
+  ㅇ Persistent 영역 : controller -> DAO
+  
+8. 프레임 워크 
+ - 3-tier
+  ㅇ 프리젠테이션영역 개발을 위한 프레임워크 : Spring, Struts
+  ㅇ 비즈 프레임워크 : spring AOP, IOC
+  ㅇ 퍼시스턴트 프레임워크 : mybatis, spring JDBC, hibernate

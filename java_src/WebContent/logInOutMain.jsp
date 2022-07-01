@@ -2,10 +2,16 @@
     pageEncoding="UTF-8"%>
 	
 	<% if (session.isNew() || session.getAttribute("id") == null) { %>
-		<% String msg = (String)request.getAttribute("msg"); 
-		   if (msg == null) { msg = "";}
-		%>
-		<%= msg %>
+<!-- JSP 스크립트 표현식 -->
+<%-- 		
+		<% String str = (String)request.getAttribute("msg"); 
+		   if (str == null) { str = "";}
+		%>str
+		<%= str %> 
+--%>
+<!-- EL 표현식 -->
+		${msg}
+		
 		<form action="loginout.jsp" method="post">
 			<label>ID</label></label><input type="text" name="id"/></br>
 			<label>비밀번호</label></label><input type="password" name="pwd"/></br>

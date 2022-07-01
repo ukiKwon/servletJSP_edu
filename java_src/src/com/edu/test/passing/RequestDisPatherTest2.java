@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 /*
  * [0629] RequestDisPatcher 이용한 페이지 이동
  */
-//@WebServlet("dispatcher2")
+//@WebServlet("/dispatcher2")
 public class RequestDisPatherTest2 extends HttpServlet {
 	final String PARAM1 = "id";
 	final String PARAM2 = "pwd";
